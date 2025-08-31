@@ -6,8 +6,10 @@ import com.bayzdelivery.dto.CreateDeliveryDTO;
 import com.bayzdelivery.dto.DeliveryDTO;
 import com.bayzdelivery.exceptions.ResourceNotFoundException;
 import com.bayzdelivery.mapper.DelievryMapper;
+import com.bayzdelivery.model.Person;
 import com.bayzdelivery.repositories.DeliveryRepository;
 import com.bayzdelivery.model.Delivery;
+import com.bayzdelivery.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,16 +18,25 @@ public class DeliveryServiceImpl implements DeliveryService {
 
   private DeliveryRepository deliveryRepository;
 
+  private PersonRepository personRepository;
+
   private DelievryMapper delievryMapper;
 
-  public DeliveryServiceImpl(DeliveryRepository deliveryRepository, DelievryMapper delievryMapper) {
+  public DeliveryServiceImpl(DeliveryRepository deliveryRepository, PersonRepository personRepository, DelievryMapper delievryMapper) {
     this.deliveryRepository = deliveryRepository;
+    this.personRepository = personRepository;
     this.delievryMapper = delievryMapper;
   }
 
   public DeliveryDTO save(CreateDeliveryDTO deliveryDTO) {
 
+    Person customer = personRepository.findById(deliveryDTO.getCustomerId()).orElseThrow(() -> new ResourceNotFoundException());
+    Person deliveryMan = personRepository.findById(deliveryDTO.getDeliveryId()).orElseThrow(() -> new ResourceNotFoundException());
     Delivery delivery = delievryMapper.toEntity(deliveryDTO);
+
+    delivery.setDeliveryMan(deliveryMan);
+    delivery.setCustomer(customer);
+
     return delievryMapper.toDTO(deliveryRepository.save(delivery));
   }
 
