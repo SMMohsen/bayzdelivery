@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.bayzdelivery.dto.PersonDTO;
+import com.bayzdelivery.exceptions.ResourceNotFoundException;
 import com.bayzdelivery.mapper.PersonMapper;
 import com.bayzdelivery.repositories.PersonRepository;
 import com.bayzdelivery.model.Person;
@@ -28,7 +29,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<PersonDTO> getAll(Integer page, Integer offset) {
-        List<Person> personList = new ArrayList<>();
         return personRepository.findAll(PageRequest.of(page, offset))
           .map(p -> personMapper.toDTO(p))
           .stream().collect(Collectors.toList());
@@ -41,6 +41,6 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDTO findById(Long personId) {
         Optional<Person> dbPerson = personRepository.findById(personId);
-        return dbPerson.map(p -> personMapper.toDTO(p)).orElse(null);
+        return dbPerson.map(p -> personMapper.toDTO(p)).orElseThrow(() ->new ResourceNotFoundException());
     }
 }

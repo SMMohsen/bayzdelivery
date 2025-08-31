@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.bayzdelivery.dto.CreateDeliveryDTO;
 import com.bayzdelivery.dto.DeliveryDTO;
+import com.bayzdelivery.exceptions.ResourceNotFoundException;
 import com.bayzdelivery.mapper.DelievryMapper;
 import com.bayzdelivery.repositories.DeliveryRepository;
 import com.bayzdelivery.model.Delivery;
@@ -30,8 +31,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
   public DeliveryDTO findById(Long deliveryId) {
     Optional<Delivery> optionalDelivery = deliveryRepository.findById(deliveryId);
-    if (optionalDelivery.isPresent()) {
-      return delievryMapper.toDTO(optionalDelivery.get());
-    }else return null;
+
+    return delievryMapper.toDTO(optionalDelivery.orElseThrow(() -> new ResourceNotFoundException()));
   }
 }
