@@ -3,7 +3,10 @@ package com.bayzdelivery.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.bayzdelivery.dto.PersonDTO;
+import com.bayzdelivery.mapper.PersonMapper;
 import com.bayzdelivery.repositories.PersonRepository;
 import com.bayzdelivery.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,23 +15,31 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-    @Autowired
-    PersonRepository personRepository;
+    private PersonRepository personRepository;
+
+    private PersonMapper personMapper;
+
+    public PersonServiceImpl(PersonRepository personRepository, PersonMapper personMapper) {
+        this.personRepository = personRepository;
+        this.personMapper = personMapper;
+    }
 
     @Override
-    public List<Person> getAll() {
+    public List<PersonDTO> getAll() {
         List<Person> personList = new ArrayList<>();
         personRepository.findAll().forEach(personList::add);
-        return personList;
+        return personList.stream()
+          .map(p -> personMapper.toDTO(p))
+          .collect(Collectors.toList());
     }
 
-    public Person save(Person p) {
-        return personRepository.save(p);
+    public PersonDTO save(PersonDTO p) {
+        return personMapper.toDTO(personRepository.save(personMapper.toEntity(p)));
     }
 
     @Override
-    public Person findById(Long personId) {
+    public PersonDTO findById(Long personId) {
         Optional<Person> dbPerson = personRepository.findById(personId);
-        return dbPerson.orElse(null);
+        return dbPerson.map(p -> personMapper.toDTO(p)).orElse(null);
     }
 }

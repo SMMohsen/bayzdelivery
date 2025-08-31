@@ -1,13 +1,15 @@
 package com.bayzdelivery.service;
 
 import java.util.List;
+
+import com.bayzdelivery.dto.PersonDTO;
 import com.bayzdelivery.model.Person;
 
 public interface PersonService {
-  public List<Person> getAll();
+  public List<PersonDTO> getAll();
 
-  public Person save(Person p);
+  public PersonDTO save(PersonDTO p);
 
-  public Person findById(Long personId);
+  public PersonDTO findById(Long personId);
 
 }

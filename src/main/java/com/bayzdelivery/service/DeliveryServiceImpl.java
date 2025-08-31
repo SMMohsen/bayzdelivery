@@ -2,25 +2,36 @@ package com.bayzdelivery.service;
 
 import java.util.Optional;
 
+import com.bayzdelivery.dto.CreateDeliveryDTO;
+import com.bayzdelivery.dto.DeliveryDTO;
+import com.bayzdelivery.mapper.DelievryMapper;
 import com.bayzdelivery.repositories.DeliveryRepository;
 import com.bayzdelivery.model.Delivery;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DeliveryServiceImpl implements DeliveryService {
 
-  @Autowired
-  DeliveryRepository deliveryRepository;
 
-  public Delivery save(Delivery delivery) {
-    return deliveryRepository.save(delivery);
+  private DeliveryRepository deliveryRepository;
+
+  private DelievryMapper delievryMapper;
+
+  public DeliveryServiceImpl(DeliveryRepository deliveryRepository, DelievryMapper delievryMapper) {
+    this.deliveryRepository = deliveryRepository;
+    this.delievryMapper = delievryMapper;
   }
 
-  public Delivery findById(Long deliveryId) {
+  public DeliveryDTO save(CreateDeliveryDTO deliveryDTO) {
+
+    Delivery delivery = delievryMapper.toEntity(deliveryDTO);
+    return delievryMapper.toDTO(deliveryRepository.save(delivery));
+  }
+
+  public DeliveryDTO findById(Long deliveryId) {
     Optional<Delivery> optionalDelivery = deliveryRepository.findById(deliveryId);
     if (optionalDelivery.isPresent()) {
-      return optionalDelivery.get();
+      return delievryMapper.toDTO(optionalDelivery.get());
     }else return null;
   }
 }
