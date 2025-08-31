@@ -6,7 +6,7 @@ import com.bayzdelivery.dto.PersonDTO;
 import com.bayzdelivery.model.Person;
 
 public interface PersonService {
-  public List<PersonDTO> getAll();
+  public List<PersonDTO> getAll(Integer page, Integer offset);
 
   public PersonDTO save(PersonDTO p);
 

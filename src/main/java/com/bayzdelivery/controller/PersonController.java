@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bayzdelivery.service.PersonService;
 
@@ -31,12 +32,12 @@ public class PersonController {
   }
 
   @GetMapping
-  public List<PersonDTO> getAllPersons() {
-    return personService.getAll();
+  public List<PersonDTO> getAllPersons(@RequestParam(defaultValue = "0", required = false) Integer page, @RequestParam(defaultValue = "10", required = false) Integer offset) {
+    return personService.getAll(page, offset);
   }
 
-  @GetMapping("{pers-id}")
-  public PersonDTO getPersonById(@PathVariable(name="person-id", required=true)Long personId) {
+  @GetMapping("/{person-id}")
+  public PersonDTO getPersonById(@PathVariable(name="person-id") Long personId) {
     PersonDTO person = personService.findById(personId);
     if (person != null) {
       return person;
