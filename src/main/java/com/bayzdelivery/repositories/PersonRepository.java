@@ -13,6 +13,8 @@ import java.util.Optional;
 
 public interface PersonRepository extends CrudRepository<Person, Long>, PagingAndSortingRepository<Person, Long> {
 
+  boolean existsByRegistrationNumberOrEmail(String registrationNumber, String email);
+
   Optional<Person> findByIdAndType(Long id, PersonType type);
 
   @Query(value = "select p.id, p.name, sum(d.comission) as comission from person p, delivery d \n" +

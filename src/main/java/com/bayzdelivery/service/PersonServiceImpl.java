@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.bayzdelivery.dto.PersonDTO;
 import com.bayzdelivery.dto.TopDeliveryMenResponse;
+import com.bayzdelivery.exceptions.PersonAlreadyExistsException;
 import com.bayzdelivery.exceptions.ResourceNotFoundException;
 import com.bayzdelivery.mapper.PersonMapper;
 import com.bayzdelivery.model.DeliveryWithCommission;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import static com.bayzdelivery.util.Constants.customerNotFoundMessage;
+import static com.bayzdelivery.util.Constants.personAlreadyExistsMessage;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -37,6 +39,12 @@ public class PersonServiceImpl implements PersonService {
     }
 
     public PersonDTO save(PersonDTO p) {
+
+        if(personRepository.existsByRegistrationNumberOrEmail(p.getRegistrationNumber(), p.getEmail())) {
+
+            throw new PersonAlreadyExistsException(personAlreadyExistsMessage);
+        }
+
         return personMapper.toDTO(personRepository.save(personMapper.toEntity(p)));
     }
 
