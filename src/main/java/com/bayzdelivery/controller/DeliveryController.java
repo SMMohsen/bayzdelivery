@@ -2,6 +2,7 @@ package com.bayzdelivery.controller;
 
 import com.bayzdelivery.dto.CreateDeliveryDTO;
 import com.bayzdelivery.dto.DeliveryDTO;
+import com.bayzdelivery.dto.TopDeliveryMenResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,5 +34,11 @@ public class DeliveryController {
     if (delivery != null)
       return delivery;
     return null;
+  }
+
+  @GetMapping("/top-earnings")
+  public TopDeliveryMenResponse getTopDelivery() {
+
+    return deliveryService.getTop3DeliveryMen();
   }
 }
