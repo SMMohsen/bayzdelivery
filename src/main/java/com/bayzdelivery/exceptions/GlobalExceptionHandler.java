@@ -16,13 +16,13 @@ public class GlobalExceptionHandler {
   @ExceptionHandler
   public ErrorDTO handle(Exception exception) {
     LOG.error("Request could not be processed: ", exception);
-    return new ErrorDTO("Request could not be processed");
+    return new ErrorDTO(exception.getMessage());
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(ResourceNotFoundException.class)
   public ErrorDTO handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
 
-    return new ErrorDTO("not found");
+    return new ErrorDTO(resourceNotFoundException.getMessage());
   }
 }

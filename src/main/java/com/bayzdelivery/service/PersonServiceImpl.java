@@ -15,6 +15,8 @@ import com.bayzdelivery.model.Person;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import static com.bayzdelivery.util.Constants.customerNotFoundMessage;
+
 @Service
 public class PersonServiceImpl implements PersonService {
 
@@ -41,7 +43,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDTO findById(Long personId) {
         Optional<Person> dbPerson = personRepository.findById(personId);
-        return dbPerson.map(p -> personMapper.toDTO(p)).orElseThrow(() ->new ResourceNotFoundException());
+        return dbPerson.map(p -> personMapper.toDTO(p)).orElseThrow(() ->new ResourceNotFoundException(customerNotFoundMessage));
     }
 
     @Override
