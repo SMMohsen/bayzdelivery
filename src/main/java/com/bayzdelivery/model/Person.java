@@ -3,6 +3,8 @@ package com.bayzdelivery.model;
 import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,6 +34,10 @@ public class Person implements Serializable{
 
   @Column(name = "registration_number")
   String registrationNumber;
+
+  @Enumerated(value = EnumType.STRING)
+  @Column(name = "type")
+  PersonType type;
 
   public Long getId() {
     return id;
@@ -106,6 +112,14 @@ public class Person implements Serializable{
     } else if (!registrationNumber.equals(other.registrationNumber))
       return false;
     return true;
+  }
+
+  public PersonType getType() {
+    return type;
+  }
+
+  public void setType(PersonType type) {
+    this.type = type;
   }
 
   @Override

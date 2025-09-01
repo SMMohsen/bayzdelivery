@@ -1,5 +1,6 @@
 package com.bayzdelivery.dto;
 
+import com.bayzdelivery.model.PersonType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
@@ -15,6 +16,9 @@ public class PersonDTO {
   String email;
 
   String registrationNumber;
+
+  @NotNull
+  PersonType type;
 
   public Long getId() {
     return id;
@@ -46,5 +50,13 @@ public class PersonDTO {
 
   public void setRegistrationNumber(String registrationNumber) {
     this.registrationNumber = registrationNumber;
+  }
+
+  public PersonType getType() {
+    return type;
+  }
+
+  public void setType(PersonType type) {
+    this.type = type;
   }
 }

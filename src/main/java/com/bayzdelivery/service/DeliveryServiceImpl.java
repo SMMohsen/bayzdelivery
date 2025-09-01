@@ -7,6 +7,7 @@ import com.bayzdelivery.dto.DeliveryDTO;
 import com.bayzdelivery.exceptions.ResourceNotFoundException;
 import com.bayzdelivery.mapper.DelievryMapper;
 import com.bayzdelivery.model.Person;
+import com.bayzdelivery.model.PersonType;
 import com.bayzdelivery.repositories.DeliveryRepository;
 import com.bayzdelivery.model.Delivery;
 import com.bayzdelivery.repositories.PersonRepository;
@@ -30,8 +31,8 @@ public class DeliveryServiceImpl implements DeliveryService {
 
   public DeliveryDTO save(CreateDeliveryDTO deliveryDTO) {
 
-    Person customer = personRepository.findById(deliveryDTO.getCustomerId()).orElseThrow(() -> new ResourceNotFoundException());
-    Person deliveryMan = personRepository.findById(deliveryDTO.getDeliveryId()).orElseThrow(() -> new ResourceNotFoundException());
+    Person customer = personRepository.findByIdAndType(deliveryDTO.getCustomerId(), PersonType.CUSTOMER.name()).orElseThrow(() -> new ResourceNotFoundException());
+    Person deliveryMan = personRepository.findByIdAndType(deliveryDTO.getDeliveryId(), PersonType.DELIVERY.name()).orElseThrow(() -> new ResourceNotFoundException());
     Delivery delivery = delievryMapper.toEntity(deliveryDTO);
 
     delivery.setDeliveryMan(deliveryMan);
