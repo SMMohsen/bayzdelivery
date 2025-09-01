@@ -7,6 +7,7 @@ public class PersonDTO {
 
   Long id;
 
+  @NotNull
   String name;
 
   @NotNull

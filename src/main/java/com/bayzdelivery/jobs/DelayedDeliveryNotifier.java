@@ -1,6 +1,6 @@
 package com.bayzdelivery.jobs;
 
-import com.bayzdelivery.exceptions.GlobalExceptionHandler;
+import com.bayzdelivery.repositories.DeliveryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
@@ -12,11 +12,18 @@ public class DelayedDeliveryNotifier {
 
     private static final Logger LOG = LoggerFactory.getLogger(DelayedDeliveryNotifier.class);
 
+    private DeliveryRepository deliveryRepository;
+
+    public DelayedDeliveryNotifier(DeliveryRepository deliveryRepository) {
+        this.deliveryRepository = deliveryRepository;
+    }
+
     /**
      *  Use this method for the TASK 3
      */
     @Scheduled(fixedDelay = 30000)
     public void checkDelayedDeliveries() {
+
 
     }
 

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bayzdelivery.service.PersonService;
 
 @RestController
-@RequestMapping("/api/v1/person")
+@RequestMapping("/v1/person")
 public class PersonController {
 
   PersonService personService;

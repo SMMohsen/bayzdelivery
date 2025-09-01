@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bayzdelivery.service.DeliveryService;
 
 @RestController
-@RequestMapping("/api/v1/delivery")
+@RequestMapping("/v1/delivery")
 public class DeliveryController {
 
   private DeliveryService deliveryService;
