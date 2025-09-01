@@ -20,9 +20,9 @@ public class GlobalExceptionHandler {
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  @ExceptionHandler(ResourceNotFoundException.class)
-  public ErrorDTO handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
+  @ExceptionHandler(CustomException.class)
+  public ErrorDTO handleResourceNotFoundException(CustomException customException) {
 
-    return new ErrorDTO(resourceNotFoundException.getMessage());
+    return new ErrorDTO(customException.getMessage());
   }
 }
