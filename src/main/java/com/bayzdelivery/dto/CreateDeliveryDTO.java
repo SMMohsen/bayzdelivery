@@ -19,9 +19,6 @@ public class CreateDeliveryDTO {
 
   Long price;
 
-  @Column(name = "comission")
-  Long comission;
-
   @NotNull
   Long deliveryId;
 
@@ -66,14 +63,6 @@ public class CreateDeliveryDTO {
 
   public void setPrice(Long price) {
     this.price = price;
-  }
-
-  public Long getComission() {
-    return comission;
-  }
-
-  public void setComission(Long comission) {
-    this.comission = comission;
   }
 
   public Long getDeliveryId() {

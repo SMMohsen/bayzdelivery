@@ -37,6 +37,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     delivery.setDeliveryMan(deliveryMan);
     delivery.setCustomer(customer);
+    delivery.calculateCommission();
 
     return delievryMapper.toDTO(deliveryRepository.save(delivery));
   }
