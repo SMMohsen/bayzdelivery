@@ -1,23 +1,25 @@
 package com.bayzdelivery.dto;
 
+import com.bayzdelivery.model.DeliveryWithCommission;
+
 import java.util.List;
 
 public class TopDeliveryMenResponse {
 
-  private List<PersonDTO> delivery;
+  private List<DeliveryWithCommission> delivery;
 
   private Double avgCommission;
 
-  public TopDeliveryMenResponse(List<PersonDTO> delivery, Double avgCommission) {
+  public TopDeliveryMenResponse(List<DeliveryWithCommission> delivery, Double avgCommission) {
     this.delivery = delivery;
     this.avgCommission = avgCommission;
   }
 
-  public List<PersonDTO> getDelivery() {
+  public List<DeliveryWithCommission> getDelivery() {
     return delivery;
   }
 
-  public void setDelivery(List<PersonDTO> delivery) {
+  public void setDelivery(List<DeliveryWithCommission> delivery) {
     this.delivery = delivery;
   }
 

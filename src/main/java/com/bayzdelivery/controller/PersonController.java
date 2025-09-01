@@ -1,8 +1,10 @@
 package com.bayzdelivery.controller;
 
+import java.time.Instant;
 import java.util.List;
 
 import com.bayzdelivery.dto.PersonDTO;
+import com.bayzdelivery.dto.TopDeliveryMenResponse;
 import com.bayzdelivery.model.Person;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +47,10 @@ public class PersonController {
     return null;
   }
 
+  @GetMapping("/top-earnings")
+  public TopDeliveryMenResponse getTopThreeDeliveryEarnings(@RequestParam Instant start, @RequestParam Instant end) {
+
+    return personService.findTopThreeEarningsDeliveryMen(start, end);
+  }
 
 }

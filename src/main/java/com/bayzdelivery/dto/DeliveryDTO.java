@@ -19,14 +19,13 @@ public class DeliveryDTO {
 
   Long price;
 
-  @Column(name = "comission")
   Long comission;
 
   @NotNull
-  PersonDTO deliveryId;
+  PersonDTO deliveryMan;
 
   @NotNull
-  PersonDTO customerId;
+  PersonDTO customer;
 
   public Long getId() {
     return id;
@@ -76,19 +75,19 @@ public class DeliveryDTO {
     this.comission = comission;
   }
 
-  public PersonDTO getDeliveryId() {
-    return deliveryId;
+  public PersonDTO getDeliveryMan() {
+    return deliveryMan;
   }
 
-  public void setDeliveryId(PersonDTO deliveryId) {
-    this.deliveryId = deliveryId;
+  public void setDeliveryMan(PersonDTO deliveryMan) {
+    this.deliveryMan = deliveryMan;
   }
 
-  public PersonDTO getCustomerId() {
-    return customerId;
+  public PersonDTO getCustomer() {
+    return customer;
   }
 
-  public void setCustomerId(PersonDTO customerId) {
-    this.customerId = customerId;
+  public void setCustomer(PersonDTO customer) {
+    this.customer = customer;
   }
 }

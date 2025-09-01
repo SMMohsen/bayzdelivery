@@ -35,10 +35,4 @@ public class DeliveryController {
       return delivery;
     return null;
   }
-
-  @GetMapping("/top-earnings")
-  public TopDeliveryMenResponse getTopDelivery() {
-
-    return deliveryService.getTop3DeliveryMen();
-  }
 }
