@@ -1,5 +1,6 @@
 package com.bayzdelivery.service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -7,7 +8,6 @@ import com.bayzdelivery.dto.CreateDeliveryDTO;
 import com.bayzdelivery.dto.DeliveryDTO;
 import com.bayzdelivery.exceptions.ResourceNotFoundException;
 import com.bayzdelivery.mapper.DelievryMapper;
-import com.bayzdelivery.mapper.PersonMapper;
 import com.bayzdelivery.model.Person;
 import com.bayzdelivery.model.PersonType;
 import com.bayzdelivery.repositories.DeliveryRepository;
@@ -25,13 +25,10 @@ public class DeliveryServiceImpl implements DeliveryService {
 
   private DelievryMapper delievryMapper;
 
-  private PersonMapper personMapper;
-
-  public DeliveryServiceImpl(DeliveryRepository deliveryRepository, PersonRepository personRepository, DelievryMapper delievryMapper, PersonMapper personMapper) {
+  public DeliveryServiceImpl(DeliveryRepository deliveryRepository, PersonRepository personRepository, DelievryMapper delievryMapper) {
     this.deliveryRepository = deliveryRepository;
     this.personRepository = personRepository;
     this.delievryMapper = delievryMapper;
-    this.personMapper = personMapper;
   }
 
   public DeliveryDTO save(CreateDeliveryDTO deliveryDTO) {
@@ -51,5 +48,11 @@ public class DeliveryServiceImpl implements DeliveryService {
     Optional<Delivery> optionalDelivery = deliveryRepository.findById(deliveryId);
 
     return delievryMapper.toDTO(optionalDelivery.orElseThrow(() -> new ResourceNotFoundException()));
+  }
+
+  public List<Long> findLateDeliveries(Long minutesAllowedToDeliver) {
+
+    return deliveryRepository.findDeliveriesExceededMinutesAllowed(minutesAllowedToDeliver);
+
   }
 }
