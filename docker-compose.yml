@@ -14,12 +14,16 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123qwe}
       POSTGRES_DB: ${POSTGRES_DB:-bayzdelivery}
       PGDATA: /data/postgres/bayztracker
-    networks:
-      - postgres
 
-networks:
-  postgres:
-    driver: bridge
+  app:
+    build: .
+    ports:
+      - "8081:8081"
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/bayzdelivery
+    depends_on:
+      - postgres
+    restart: always
 
 volumes:
   postgres:

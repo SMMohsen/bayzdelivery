@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "dc94f239-cf49-461e-8bb9-1cbf2b0dd6cb",
+		"name": "BayzDelivery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23753436"
+	},
+	"item": [
+		{
+			"name": "Create Person",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"sameh\",\n    \"registrationNumber\" : \"123\",\n    \"type\" : \"DELIVERY\",\n    \"email\" : \"sameh@mail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/api/v1/person",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Persons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/api/v1/person",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"person"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Delivery",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\" : 1,\n    \"deliveryId\" : 2,\n    \"startTime\" : \"2025-09-01T12:12:12.00Z\",\n    \"endTime\" : \"2025-09-01T13:12:12.00Z\",\n    \"distance\" : 3,\n    \"price\" : 20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/api/v1/delivery",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"delivery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Top Earnings",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\" : 1,\n    \"deliveryId\" : 2,\n    \"startTime\" : \"2025-09-01T12:12:12.00Z\",\n    \"endTime\" : \"2025-09-01T13:12:12.00Z\",\n    \"distance\" : 3,\n    \"price\" : 20\n}"
+				},
+				"url": {
+					"raw": "localhost:8081/api/v1/delivery/top-earnings",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"delivery",
+						"top-earnings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Delivery",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\" : 1,\n    \"deliveryId\" : 2,\n    \"startTime\" : \"2025-09-01T12:12:12.00Z\",\n    \"endTime\" : \"2025-09-01T13:12:12.00Z\",\n    \"distance\" : 3,\n    \"price\" : 20\n}"
+				},
+				"url": {
+					"raw": "localhost:8081/api/v1/delivery/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"delivery",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
